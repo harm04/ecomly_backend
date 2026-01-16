@@ -14,11 +14,7 @@ const vendorRouter = require("./routes/vendor_routes");
 const ordersRouter = require("./routes/orders_routes");
 const checkoutRouter = require("./routes/checkout_routes");
 
-// Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-// const host = process.env.HOST;
 
 // Middleware
 app.use(express.json());
@@ -33,17 +29,14 @@ app.use(vendorRouter);
 app.use(ordersRouter);
 app.use(checkoutRouter);
 
-// Connect to MongoDB
+// MongoDB
 mongoose
   .connect(process.env.MONGODB_CONNECTION_URL)
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => {
-    console.error("Error connecting to MongoDB:", error);
-  });
+  .then(() => console.log("Connected to MongoDB"))
+  .catch(err => console.error("MongoDB error:", err));
 
-// Start the server
-app.listen(port, '0.0.0.0', function () {
-  console.log(`Server is running on http://0.0.0.0:${port}`);
+// Server (Render compatible)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server is running on port ${PORT}`);
 });
