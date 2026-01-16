@@ -16,8 +16,9 @@ const checkoutRouter = require("./routes/checkout_routes");
 
 // Initialize Express app
 const app = express();
-const port = process.env.PORT;
-const host = process.env.HOST;
+const PORT = process.env.PORT || 3000;
+
+// const host = process.env.HOST;
 
 // Middleware
 app.use(express.json());
@@ -43,6 +44,6 @@ mongoose
   });
 
 // Start the server
-app.listen(port, host, function () {
-  console.log(`Server is running on http://${host}:${port}`);
+app.listen(port, '0.0.0.0', function () {
+  console.log(`Server is running on http://0.0.0.0:${port}`);
 });
